@@ -3,24 +3,17 @@
 require("dotenv").config();
 
 var axios = require('axios');
-
 var fs = require('fs');
-
 var Spotify = require('node-spotify-api'); 
-
 var keys = require("./keys.js");
-
-let name = "";
-
 var spotify = new Spotify({
     id: process.env.SPOTIFY_ID,
     secret: process.env.SPOTIFY_SECRET
 });
 
 //varibales declaration
-var action = process.argv[2];
-
-var userInput = process.argv[3];
+let action = process.argv[2];
+let userInput = process.argv[3];
 
 
 //switch case according to user's input
@@ -33,57 +26,63 @@ switch(action) {
         break;
     case  "do-what-it-says":
         spotifyDo(userInput);
+        break;
+    };
 
-};
 
-//
-// function spotifySong(userInput) {
+function spotifySong(userInput) {
 
-//     spotify.search ({ type: 'track', query: userInput},
-//     function (err,data) {
-//         if(err) {
-//          return console.log('Error occurred: ' + err);
-//   }
-//  else 
-// {
-//     let songs = data.tracks.items;
+    if(!userInput) {
+        userInput = "The Sign";
+    }  
+spotify.search ({ type: 'track', query: userInput})
+    .then (function (response) {
 
-//     console.log(songs);
+        for(let i = 0; i < 5; i++) {
 
-//     for(let i = 0; i< songs.length; i++) {
+let results = 
+    "Artist: " +response.tracks.items[0].artists[0].name;
+    "\nSong: " +response.tracks.items[0].name ;
+    "\nAlbum: "+ response.tracks.items[0].album.name;
+    "\nPreview: "+response.tracks.items[0].preview_url;
 
-//     console.log("Artist: " +data.tracks.items[0].artists[0].name);
-//     console.log("\nSong: " +data.tracks.items[0].name );
-//     console.log("\nAlbum: "+ data.tracks.items[0].album.name);
-//     console.log("\nPreview: "+data.tracks.items[0].preview_url);
-
-//     // console.log(spotifyResults);
-//  }  
-// } 
-// }
-// );
-// } 
+     console.log(results);
+} 
+})
+.catch(function(err) {
+    console.log(err);
+});
+}
 
 
 function omdbMovie(userInput){
-    if(userInput == null){
+    if(!userInput){
         userInput = "mr nobody"
     }
 
-    axios.get("http://www.omdbapi.com/?t="+userInput+ "&y=&plot=short&apikey=triology")
+    axios.get("http://www.omdbapi.com/?t= " + userInput + "&y=&plot=short&apikey=triology")
     .then (function (response){
         let movieResults = 
 
-        console.log("Movie title : "+response.data.Title + 
+        "Movie title : "+response.data.Title + 
         "\nYear of Release: "+response.data.Year+
         "\nIMDB Rating : "+response.data.imdbRating+
         "\nCountry Produced: "+response.data.Country+
         "\nLanguage: "+response.data.Plot+
-        "\nActor/Actress: "+response.data.Actors);
+        "\nActor/Actress: "+response.data.Actors;
+
+        console.log(movieResults);
     })
-    .catch(function (err){
-        console.log(err);
-    });
 }
 
+function spotifyDo(userInput) {
 
+    fs.readFile("random.txt","utf8", function (err,data){
+        if(err){
+            return console.log(err);
+        }
+
+        let arr = data.split(",");
+        spotifyDo(arr[0],arr[1]);
+    })
+}
