@@ -35,6 +35,7 @@ function spotifySong(userInput) {
     if (userInput == null ) {
         userInput = "The Sign";
     }
+
     spotify.search({ type: 'track', query: userInput })
         .then(function (response) {
 
@@ -75,11 +76,8 @@ function omdbMovie(userInput) {
 function spotifyDo(userInput) {
 
     fs.readFile("random.txt", "utf8", function (err, data) {
-        if (err) {
-            return console.log(err);
-        }
 
         let arr = data.split(",");
-        spotifyDo(arr[0], arr[1]);
+        spotifyDo(arr[0]);
     })
 }
