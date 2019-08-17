@@ -1,14 +1,20 @@
 # liri-node-app
 
+Spotify Output with Null value
+------------------------------
 
-![Spotify Output](./images/spotifynull.png)
-Format: ![Alt Text](url)
+![SpotifyNULL Output](./images/spotifynull.png)
 
-![Spotify Output](./images/spotify.png)
-Format: ![Alt Text](url)
+Spotify Output with Value
+------------------------------
+![SpotifyValue Output](./images/spotify.png)
 
-![Spotify Output](./images/movie_empty.png)
-Format: ![Alt Text](url)
+OMDB Output with Null value
+------------------------------
 
-![Spotify Output](./images/movievalue.png)
-Format: ![Alt Text](url)
+![MovieEmpty Output](./images/movie_empty.png)
+
+OMDB Output with value
+------------------------------
+
+![MovieValue Output](./images/movievalue.png)
