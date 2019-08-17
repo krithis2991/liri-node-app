@@ -7,7 +7,7 @@ Spotify Output with Null value
 
 Spotify Output with Value
 ------------------------------
-![SpotifyValue Output](./images/spotify.png)
+![SpotifyValue Output](./images/spotifyvalue.png)
 
 OMDB Output with Null value
 ------------------------------
